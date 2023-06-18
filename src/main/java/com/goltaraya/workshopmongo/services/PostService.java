@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.goltaraya.workshopmongo.domain.Post;
 import com.goltaraya.workshopmongo.repositories.PostRepository;
+import com.goltaraya.workshopmongo.services.exception.ObjectNotFoundException;
 
 @Service
 public class PostService {
@@ -16,6 +17,6 @@ public class PostService {
 
 	public Post findById(String id) {
 		Optional<Post> obj = repository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
 	}
 }
